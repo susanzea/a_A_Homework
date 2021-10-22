@@ -1,4 +1,3 @@
-require_relative "./stack.rb"
 
 class Queue
 
