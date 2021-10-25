@@ -9,15 +9,18 @@ class GraphNode
     end
 
 
-    def bfs(starting_node, target_value)
+
+end
+
+def bfs(starting_node, target_value)
         q = [starting_node]
-        visited = Set.new()
+        visited = []
 
         until q.empty?
 
-            if q.first.value == target
+            if q.first.value == target_value
                 return q.first
-            elsif visited.includes?(q.first)
+            elsif visited.include?(q.first)
                 q.shift
             else
                 visited << q.first
@@ -28,8 +31,6 @@ class GraphNode
 
         nil
     end
-end
-
 
 a = GraphNode.new('a')
 b = GraphNode.new('b')
@@ -41,3 +42,6 @@ a.neighbors = [b, c, e]
 c.neighbors = [b, d]
 e.neighbors = [a]
 f.neighbors = [e]
+
+# p   bfs(a, "b")
+#  p bfs(a, "f")
