@@ -1,5 +1,5 @@
 class Simon
-  COLORS = %w(red blue green yellow)
+  COLORS = ["red","blue","green","yellow"]
 
   attr_accessor :sequence_length, :game_over, :seq
 
@@ -10,24 +10,29 @@ class Simon
   end
 
   def play
-    take_turn until game_over
+    until game_over
+      take_turn
+    end
     game_over_message
     reset_game
   end
 
   def take_turn
-    show_sequence
-    require_sequence
+    p show_sequence
+    self.game_over = true unless require_sequence == @seq
     @sequence_length += 1
     round_success_message unless game_over
   end
 
   def show_sequence
     add_random_color
+    @seq
   end
 
   def require_sequence
-
+    puts "Please enter the color sequence separated by spaces: blue green red ..."
+    user_input = gets.chomp.split(" ")
+    return user_input
   end
 
   def add_random_color
@@ -35,11 +40,11 @@ class Simon
   end
 
   def round_success_message
-
+    puts "woohoo! ya got it"
   end
 
   def game_over_message
-
+    puts "game over!"
   end
 
   def reset_game
@@ -48,3 +53,6 @@ class Simon
     @seq = []
   end
 end
+
+p game = Simon.new
+game.play
