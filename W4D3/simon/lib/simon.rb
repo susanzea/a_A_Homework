@@ -19,7 +19,7 @@ class Simon
 
   def take_turn
     p show_sequence
-    self.game_over = true unless require_sequence == @seq
+    @game_over = true unless require_sequence == @seq
     @sequence_length += 1
     round_success_message unless game_over
   end
