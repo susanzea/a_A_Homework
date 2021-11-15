@@ -26,16 +26,14 @@ class User < ApplicationRecord
         self.session_token ||= User.generate_session_token
     end
 
-    def password=(password)
-        debugger
+    def password=(password) #this is a plain text password
+        #passing plain text password into BCrypt to get password_digest
+        self.password_digest = BCrypt::Password.create(password)
         @password = password
-        @password_digest = BCrypt::Password.create(password)
     end
 
     def is_password?(password)
         Bcrypt::Password.new(@password_digest).is_password?(password)
     end
-
-    
 
 end

@@ -74,3 +74,6 @@ Migrating to CreateUsers (20211114223110)
   [1m[35m (7.3ms)[0m  [1m[31mROLLBACK[0m
   [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
   [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Create (1.9ms)[0m  [1m[32mINSERT INTO "users" ("username", "password_digest", "session_token", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["username", "bob"], ["password_digest", "$2a$12$Bofnue9f8gYpaBFqY2agD.FA8oclD6XqzmwPv0gr3FzuTK7dnl5GW"], ["session_token", "tqcKTBzDxBnJwKb8j2jJRQ"], ["created_at", "2021-11-15 14:48:24.480020"], ["updated_at", "2021-11-15 14:48:24.480020"]]
+  [1m[35m (0.8ms)[0m  [1m[35mCOMMIT[0m
