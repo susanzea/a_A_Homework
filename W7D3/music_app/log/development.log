@@ -1,0 +1,583 @@
+  [1m[35m (108.0ms)[0m  [1m[35mCREATE DATABASE "music_app_development" ENCODING = 'unicode'[0m
+  ↳ bin/rails:9
+  [1m[35m (27.7ms)[0m  [1m[35mCREATE DATABASE "music_app_test" ENCODING = 'unicode'[0m
+  ↳ bin/rails:9
+  [1m[35m (21.6ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  ↳ bin/rails:9
+  [1m[35m (4.8ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ bin/rails:9
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT pg_try_advisory_lock(4505726345591715405)[0m
+  ↳ bin/rails:9
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+Migrating to CreateUsers (20211116153616)
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (7.4ms)[0m  [1m[35mCREATE TABLE "users" ("id" bigserial primary key, "email" character varying NOT NULL, "password_digest" character varying NOT NULL, "session_token" character varying NOT NULL, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ db/migrate/20211116153616_create_users.rb:3
+  [1m[35m (0.6ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_users_on_email" ON "users"  ("email")[0m
+  ↳ db/migrate/20211116153616_create_users.rb:11
+  [1m[35m (0.5ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_users_on_session_token" ON "users"  ("session_token")[0m
+  ↳ db/migrate/20211116153616_create_users.rb:12
+  [1m[36mActiveRecord::SchemaMigration Create (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20211116153616"]]
+  ↳ bin/rails:9
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  ↳ bin/rails:9
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[36mActiveRecord::InternalMetadata Create (0.7ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "development"], ["created_at", "2021-11-16 15:39:16.076682"], ["updated_at", "2021-11-16 15:39:16.076682"]]
+  ↳ bin/rails:9
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT pg_advisory_unlock(4505726345591715405)[0m
+  ↳ bin/rails:9
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+  [1m[35m (1.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /Users/susanzea/.rbenv/versions/2.5.1/bin/annotate:23
+Started GET "/" for ::1 at 2021-11-16 16:33:24 -0500
+  [1m[35m (1.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /Users/susanzea/.rbenv/versions/2.5.1/lib/ruby/gems/2.5.0/gems/activerecord-5.2.6/lib/active_record/log_subscriber.rb:98
+Processing by Rails::WelcomeController#index as HTML
+  Rendering /Users/susanzea/.rbenv/versions/2.5.1/lib/ruby/gems/2.5.0/gems/railties-5.2.6/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered /Users/susanzea/.rbenv/versions/2.5.1/lib/ruby/gems/2.5.0/gems/railties-5.2.6/lib/rails/templates/rails/welcome/index.html.erb (2.0ms)
+Completed 200 OK in 12ms (Views: 5.9ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users" for ::1 at 2021-11-16 16:33:37 -0500
+  
+ActionController::RoutingError (No route matches [GET] "/users"):
+  
+actionpack (5.2.6) lib/action_dispatch/middleware/debug_exceptions.rb:65:in `call'
+web-console (3.7.0) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.7.0) lib/web_console/middleware.rb:30:in `block in call'
+web-console (3.7.0) lib/web_console/middleware.rb:20:in `catch'
+web-console (3.7.0) lib/web_console/middleware.rb:20:in `call'
+actionpack (5.2.6) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (5.2.6) lib/rails/rack/logger.rb:38:in `call_app'
+railties (5.2.6) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (5.2.6) lib/active_support/tagged_logging.rb:71:in `block in tagged'
+activesupport (5.2.6) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (5.2.6) lib/active_support/tagged_logging.rb:71:in `tagged'
+railties (5.2.6) lib/rails/rack/logger.rb:26:in `call'
+sprockets-rails (3.4.0) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (5.2.6) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (5.2.6) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.2.3) lib/rack/method_override.rb:24:in `call'
+rack (2.2.3) lib/rack/runtime.rb:22:in `call'
+activesupport (5.2.6) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (5.2.6) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (5.2.6) lib/action_dispatch/middleware/static.rb:127:in `call'
+rack (2.2.3) lib/rack/sendfile.rb:110:in `call'
+railties (5.2.6) lib/rails/engine.rb:524:in `call'
+puma (3.12.6) lib/puma/configuration.rb:227:in `call'
+puma (3.12.6) lib/puma/server.rb:706:in `handle_request'
+puma (3.12.6) lib/puma/server.rb:476:in `process_client'
+puma (3.12.6) lib/puma/server.rb:334:in `block in run'
+puma (3.12.6) lib/puma/thread_pool.rb:135:in `block in spawn_thread'
+Started GET "/users/new" for ::1 at 2021-11-16 16:34:13 -0500
+
+SyntaxError - formal argument cannot be an instance variable
+    def login!(@user)
+               ^~~~~:
+  app/controllers/application_controller.rb:16:in `'
+  app/controllers/users_controller.rb:1:in `<top (required)>'
+
+Started POST "/__better_errors/72ef95332ac95e00/variables" for ::1 at 2021-11-16 16:34:13 -0500
+Started GET "/users/new" for ::1 at 2021-11-16 16:34:31 -0500
+Processing by UsersController#new as HTML
+  Rendering users/new.html.erb within layouts/application
+  Rendered users/new.html.erb within layouts/application (0.8ms)
+Completed 200 OK in 423ms (Views: 403.0ms | ActiveRecord: 13.0ms)
+
+
+Started GET "/users/new" for ::1 at 2021-11-16 16:34:33 -0500
+Processing by UsersController#new as HTML
+  Rendering users/new.html.erb within layouts/application
+  Rendered users/new.html.erb within layouts/application (0.6ms)
+Completed 200 OK in 32ms (Views: 31.2ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users/new" for ::1 at 2021-11-16 16:35:10 -0500
+Processing by UsersController#new as HTML
+  Rendering users/new.html.erb within layouts/application
+  Rendered users/new.html.erb within layouts/application (0.7ms)
+Completed 200 OK in 18ms (Views: 17.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users/new" for ::1 at 2021-11-16 16:35:36 -0500
+Processing by UsersController#new as HTML
+  Rendering users/new.html.erb within layouts/application
+  Rendered users/new.html.erb within layouts/application (0.5ms)
+Completed 200 OK in 23ms (Views: 22.5ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users" for ::1 at 2021-11-16 16:35:47 -0500
+Processing by UsersController#create as HTML
+  Parameters: {"user"=>{"email"=>"susan@susan.com", "password"=>"[FILTERED]"}, "signup"=>"Submit"}
+Can't verify CSRF token authenticity.
+Completed 422 Unprocessable Entity in 1ms (ActiveRecord: 0.0ms)
+
+
+
+ActionController::InvalidAuthenticityToken - ActionController::InvalidAuthenticityToken:
+
+Started POST "/__better_errors/3031f1def043f1a4/variables" for ::1 at 2021-11-16 16:35:47 -0500
+Started POST "/users" for ::1 at 2021-11-16 16:36:54 -0500
+Processing by UsersController#create as HTML
+  Parameters: {"user"=>{"email"=>"susan@susan.com", "password"=>"[FILTERED]"}, "signup"=>"Submit"}
+Can't verify CSRF token authenticity.
+Completed 422 Unprocessable Entity in 1ms (ActiveRecord: 0.0ms)
+
+
+
+ActionController::InvalidAuthenticityToken - ActionController::InvalidAuthenticityToken:
+
+Started POST "/__better_errors/7996e9732612c94f/variables" for ::1 at 2021-11-16 16:36:54 -0500
+Started GET "/users/new" for ::1 at 2021-11-16 16:37:20 -0500
+Processing by UsersController#new as HTML
+  Rendering users/new.html.erb within layouts/application
+  Rendered users/new.html.erb within layouts/application (0.3ms)
+Completed 200 OK in 13ms (Views: 12.2ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users" for ::1 at 2021-11-16 16:37:30 -0500
+Processing by UsersController#create as HTML
+  Parameters: {"user"=>{"email"=>"susan@susan.com", "password"=>"[FILTERED]"}, "signup"=>"Submit"}
+Can't verify CSRF token authenticity.
+Completed 422 Unprocessable Entity in 0ms (ActiveRecord: 0.0ms)
+
+
+
+ActionController::InvalidAuthenticityToken - ActionController::InvalidAuthenticityToken:
+
+Started POST "/__better_errors/dcf5b401a2fd8fa6/variables" for ::1 at 2021-11-16 16:37:31 -0500
+Started GET "/" for ::1 at 2021-11-16 16:45:10 -0500
+Started GET "/" for ::1 at 2021-11-16 16:45:10 -0500
+Processing by Rails::WelcomeController#index as HTML
+Processing by Rails::WelcomeController#index as HTML
+  Rendering /Users/susanzea/.rbenv/versions/2.5.1/lib/ruby/gems/2.5.0/gems/railties-5.2.6/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered /Users/susanzea/.rbenv/versions/2.5.1/lib/ruby/gems/2.5.0/gems/railties-5.2.6/lib/rails/templates/rails/welcome/index.html.erb (1.6ms)
+Completed 200 OK in 11ms (Views: 6.4ms | ActiveRecord: 0.0ms)
+
+
+  Rendering /Users/susanzea/.rbenv/versions/2.5.1/lib/ruby/gems/2.5.0/gems/railties-5.2.6/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered /Users/susanzea/.rbenv/versions/2.5.1/lib/ruby/gems/2.5.0/gems/railties-5.2.6/lib/rails/templates/rails/welcome/index.html.erb (0.0ms)
+Completed 200 OK in 11ms (Views: 6.6ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users/new" for ::1 at 2021-11-16 16:45:33 -0500
+  [1m[35m (1.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /Users/susanzea/.rbenv/versions/2.5.1/lib/ruby/gems/2.5.0/gems/activerecord-5.2.6/lib/active_record/log_subscriber.rb:98
+Processing by UsersController#new as HTML
+  Rendering users/new.html.erb within layouts/application
+  Rendered users/new.html.erb within layouts/application (0.9ms)
+Completed 200 OK in 143ms (Views: 120.7ms | ActiveRecord: 14.1ms)
+
+
+Started GET "/users/new" for ::1 at 2021-11-16 16:49:43 -0500
+Processing by UsersController#new as HTML
+  Rendering users/new.html.erb within layouts/application
+  Rendered users/new.html.erb within layouts/application (0.4ms)
+Completed 200 OK in 19ms (Views: 18.7ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users/new" for ::1 at 2021-11-16 16:49:56 -0500
+Processing by UsersController#new as HTML
+  Rendering users/new.html.erb within layouts/application
+  Rendered users/new.html.erb within layouts/application (0.4ms)
+Completed 200 OK in 21ms (Views: 20.6ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users/new" for ::1 at 2021-11-16 16:49:57 -0500
+Processing by UsersController#new as HTML
+  Rendering users/new.html.erb within layouts/application
+  Rendered users/new.html.erb within layouts/application (0.4ms)
+Completed 200 OK in 15ms (Views: 14.2ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users/new" for ::1 at 2021-11-16 16:50:08 -0500
+Processing by UsersController#new as HTML
+  Rendering users/new.html.erb within layouts/application
+  Rendered users/new.html.erb within layouts/application (0.4ms)
+Completed 200 OK in 14ms (Views: 13.5ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users/new" for ::1 at 2021-11-16 16:50:16 -0500
+Processing by UsersController#new as HTML
+  Rendering users/new.html.erb within layouts/application
+  Rendered users/new.html.erb within layouts/application (0.6ms)
+Completed 200 OK in 18ms (Views: 17.1ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users/new" for ::1 at 2021-11-16 16:51:20 -0500
+Processing by UsersController#new as HTML
+  Rendering users/new.html.erb within layouts/application
+  Rendered users/new.html.erb within layouts/application (1.8ms)
+Completed 200 OK in 21ms (Views: 19.2ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users/new" for ::1 at 2021-11-16 16:51:28 -0500
+Processing by UsersController#new as HTML
+  Rendering users/new.html.erb within layouts/application
+  Rendered users/new.html.erb within layouts/application (0.5ms)
+Completed 200 OK in 17ms (Views: 16.6ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users/new" for ::1 at 2021-11-16 16:51:28 -0500
+Processing by UsersController#new as HTML
+  Rendering users/new.html.erb within layouts/application
+  Rendered users/new.html.erb within layouts/application (0.5ms)
+Completed 200 OK in 18ms (Views: 17.8ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users/new" for ::1 at 2021-11-16 16:51:28 -0500
+Processing by UsersController#new as HTML
+  Rendering users/new.html.erb within layouts/application
+  Rendered users/new.html.erb within layouts/application (0.5ms)
+Completed 200 OK in 27ms (Views: 26.2ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users/new" for ::1 at 2021-11-16 16:51:29 -0500
+Processing by UsersController#new as HTML
+  Rendering users/new.html.erb within layouts/application
+  Rendered users/new.html.erb within layouts/application (0.5ms)
+Completed 200 OK in 18ms (Views: 16.9ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users/new" for ::1 at 2021-11-16 16:52:23 -0500
+Processing by UsersController#new as HTML
+  Rendering users/new.html.erb within layouts/application
+  Rendered users/new.html.erb within layouts/application (0.5ms)
+Completed 200 OK in 27ms (Views: 25.5ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users/new" for ::1 at 2021-11-16 16:52:24 -0500
+Processing by UsersController#new as HTML
+  Rendering users/new.html.erb within layouts/application
+  Rendered users/new.html.erb within layouts/application (0.5ms)
+Completed 200 OK in 24ms (Views: 23.8ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users/new" for ::1 at 2021-11-16 16:53:22 -0500
+Processing by UsersController#new as HTML
+  Rendering users/new.html.erb within layouts/application
+  Rendered users/new.html.erb within layouts/application (0.7ms)
+Completed 200 OK in 23ms (Views: 22.8ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users/new" for ::1 at 2021-11-16 16:54:00 -0500
+Processing by UsersController#new as HTML
+  Rendering users/new.html.erb within layouts/application
+  Rendered users/new.html.erb within layouts/application (0.5ms)
+Completed 200 OK in 16ms (Views: 15.1ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users/new" for ::1 at 2021-11-16 16:54:03 -0500
+Processing by UsersController#new as HTML
+  Rendering users/new.html.erb within layouts/application
+  Rendered users/new.html.erb within layouts/application (0.4ms)
+Completed 200 OK in 14ms (Views: 13.1ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users/new" for ::1 at 2021-11-16 16:54:12 -0500
+Processing by UsersController#new as HTML
+  Rendering users/new.html.erb within layouts/application
+  Rendered users/new.html.erb within layouts/application (0.5ms)
+Completed 200 OK in 19ms (Views: 18.9ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users/new" for ::1 at 2021-11-16 16:54:23 -0500
+Processing by UsersController#new as HTML
+  Rendering users/new.html.erb within layouts/application
+  Rendered users/new.html.erb within layouts/application (0.5ms)
+Completed 200 OK in 33ms (Views: 32.2ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users" for ::1 at 2021-11-16 16:54:43 -0500
+Processing by UsersController#create as HTML
+  Parameters: {"authenticity_token"=>"hXUHrEdPu/Bo/DwL7FyZq+epwZtCflidV1iUV5sMagPqjhb7P/vgIaHQ6KqDW5vpHWDJ1SAJCvo4pGRrgTGSUw=="}
+Completed 400 Bad Request in 1ms (ActiveRecord: 0.0ms)
+
+
+
+ActionController::ParameterMissing - param is missing or the value is empty: user:
+  app/controllers/users_controller.rb:52:in `new_user_params'
+  app/controllers/users_controller.rb:24:in `create'
+
+Started POST "/__better_errors/4d37402d331fdce6/variables" for ::1 at 2021-11-16 16:54:43 -0500
+Started POST "/users" for ::1 at 2021-11-16 16:55:45 -0500
+Processing by UsersController#create as HTML
+  Parameters: {"authenticity_token"=>"hXUHrEdPu/Bo/DwL7FyZq+epwZtCflidV1iUV5sMagPqjhb7P/vgIaHQ6KqDW5vpHWDJ1SAJCvo4pGRrgTGSUw=="}
+Completed 400 Bad Request in 2ms (ActiveRecord: 0.0ms)
+
+
+
+ActionController::ParameterMissing - param is missing or the value is empty: user:
+  app/controllers/users_controller.rb:52:in `new_user_params'
+  app/controllers/users_controller.rb:24:in `create'
+
+Started POST "/__better_errors/524f5196f3ef6aba/variables" for ::1 at 2021-11-16 16:55:45 -0500
+Started POST "/__better_errors/524f5196f3ef6aba/eval" for ::1 at 2021-11-16 16:55:58 -0500
+Started POST "/users" for ::1 at 2021-11-16 16:56:31 -0500
+Processing by UsersController#create as HTML
+  Parameters: {"authenticity_token"=>"hXUHrEdPu/Bo/DwL7FyZq+epwZtCflidV1iUV5sMagPqjhb7P/vgIaHQ6KqDW5vpHWDJ1SAJCvo4pGRrgTGSUw=="}
+Completed 400 Bad Request in 2ms (ActiveRecord: 0.0ms)
+
+
+
+ActionController::ParameterMissing - param is missing or the value is empty: user:
+  app/controllers/users_controller.rb:52:in `new_user_params'
+  app/controllers/users_controller.rb:24:in `create'
+
+Started POST "/__better_errors/1fb2301ab8cf9d50/variables" for ::1 at 2021-11-16 16:56:31 -0500
+Started POST "/__better_errors/1fb2301ab8cf9d50/eval" for ::1 at 2021-11-16 16:56:39 -0500
+Started POST "/__better_errors/1fb2301ab8cf9d50/variables" for ::1 at 2021-11-16 17:01:35 -0500
+Started GET "/users/new" for ::1 at 2021-11-16 17:01:37 -0500
+Processing by UsersController#new as HTML
+  Rendering users/new.html.erb within layouts/application
+  Rendered users/new.html.erb within layouts/application (0.3ms)
+Started POST "/users" for ::1 at 2021-11-16 17:02:02 -0500
+Completed 200 OK in 39511ms (Views: 39488.6ms | ActiveRecord: 17.3ms)
+
+
+Started POST "/users" for ::1 at 2021-11-16 17:02:16 -0500
+Processing by UsersController#create as HTML
+  Parameters: {"authenticity_token"=>"hXUHrEdPu/Bo/DwL7FyZq+epwZtCflidV1iUV5sMagPqjhb7P/vgIaHQ6KqDW5vpHWDJ1SAJCvo4pGRrgTGSUw=="}
+Completed 400 Bad Request in 2ms (ActiveRecord: 0.0ms)
+
+
+
+ActionController::ParameterMissing - param is missing or the value is empty: user:
+  app/controllers/users_controller.rb:52:in `new_user_params'
+  app/controllers/users_controller.rb:24:in `create'
+
+Processing by UsersController#create as HTML
+  Parameters: {"authenticity_token"=>"hXUHrEdPu/Bo/DwL7FyZq+epwZtCflidV1iUV5sMagPqjhb7P/vgIaHQ6KqDW5vpHWDJ1SAJCvo4pGRrgTGSUw=="}
+Completed 400 Bad Request in 1ms (ActiveRecord: 0.0ms)
+
+
+
+ActionController::ParameterMissing - param is missing or the value is empty: user:
+  app/controllers/users_controller.rb:52:in `new_user_params'
+  app/controllers/users_controller.rb:24:in `create'
+
+Started POST "/__better_errors/2f94423c40ee5a2d/variables" for ::1 at 2021-11-16 17:02:16 -0500
+Started POST "/users" for ::1 at 2021-11-16 17:04:02 -0500
+Processing by UsersController#create as HTML
+  Parameters: {"authenticity_token"=>"hXUHrEdPu/Bo/DwL7FyZq+epwZtCflidV1iUV5sMagPqjhb7P/vgIaHQ6KqDW5vpHWDJ1SAJCvo4pGRrgTGSUw=="}
+Completed 400 Bad Request in 1ms (ActiveRecord: 0.0ms)
+
+
+
+ActionController::ParameterMissing - param is missing or the value is empty: user:
+  app/controllers/users_controller.rb:52:in `new_user_params'
+  app/controllers/users_controller.rb:24:in `create'
+
+Started POST "/__better_errors/614355e84f4d66b3/variables" for ::1 at 2021-11-16 17:04:02 -0500
+Started POST "/users" for ::1 at 2021-11-16 17:05:50 -0500
+Processing by UsersController#create as HTML
+  Parameters: {"authenticity_token"=>"hXUHrEdPu/Bo/DwL7FyZq+epwZtCflidV1iUV5sMagPqjhb7P/vgIaHQ6KqDW5vpHWDJ1SAJCvo4pGRrgTGSUw=="}
+Completed 400 Bad Request in 1ms (ActiveRecord: 0.0ms)
+
+
+
+ActionController::ParameterMissing - param is missing or the value is empty: user:
+  app/controllers/users_controller.rb:52:in `new_user_params'
+  app/controllers/users_controller.rb:24:in `create'
+
+Started POST "/__better_errors/affb02496c453c55/variables" for ::1 at 2021-11-16 17:05:50 -0500
+Started GET "/users.new" for ::1 at 2021-11-16 17:07:29 -0500
+  [1m[35m (2.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /Users/susanzea/.rbenv/versions/2.5.1/lib/ruby/gems/2.5.0/gems/activerecord-5.2.6/lib/active_record/log_subscriber.rb:98
+  
+ActionController::RoutingError (No route matches [GET] "/users.new"):
+  
+actionpack (5.2.6) lib/action_dispatch/middleware/debug_exceptions.rb:65:in `call'
+web-console (3.7.0) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.7.0) lib/web_console/middleware.rb:30:in `block in call'
+web-console (3.7.0) lib/web_console/middleware.rb:20:in `catch'
+web-console (3.7.0) lib/web_console/middleware.rb:20:in `call'
+actionpack (5.2.6) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (5.2.6) lib/rails/rack/logger.rb:38:in `call_app'
+railties (5.2.6) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (5.2.6) lib/active_support/tagged_logging.rb:71:in `block in tagged'
+activesupport (5.2.6) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (5.2.6) lib/active_support/tagged_logging.rb:71:in `tagged'
+railties (5.2.6) lib/rails/rack/logger.rb:26:in `call'
+sprockets-rails (3.4.0) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (5.2.6) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (5.2.6) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.2.3) lib/rack/method_override.rb:24:in `call'
+rack (2.2.3) lib/rack/runtime.rb:22:in `call'
+activesupport (5.2.6) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (5.2.6) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (5.2.6) lib/action_dispatch/middleware/static.rb:127:in `call'
+rack (2.2.3) lib/rack/sendfile.rb:110:in `call'
+railties (5.2.6) lib/rails/engine.rb:524:in `call'
+puma (3.12.6) lib/puma/configuration.rb:227:in `call'
+puma (3.12.6) lib/puma/server.rb:706:in `handle_request'
+puma (3.12.6) lib/puma/server.rb:476:in `process_client'
+puma (3.12.6) lib/puma/server.rb:334:in `block in run'
+puma (3.12.6) lib/puma/thread_pool.rb:135:in `block in spawn_thread'
+Started GET "/users/new" for ::1 at 2021-11-16 17:07:34 -0500
+Processing by UsersController#new as HTML
+  Rendering users/new.html.erb within layouts/application
+  Rendered users/new.html.erb within layouts/application (20757.4ms)
+Started GET "/users" for ::1 at 2021-11-16 17:07:54 -0500
+Started GET "/users/new" for ::1 at 2021-11-16 17:07:54 -0500
+  
+ActionController::RoutingError (No route matches [GET] "/users"):
+Processing by UsersController#new as HTML
+  
+  Rendering users/new.html.erb within layouts/application
+actionpack (5.2.6) lib/action_dispatch/middleware/debug_exceptions.rb:65:in `call'
+web-console (3.7.0) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.7.0) lib/web_console/middleware.rb:30:in `block in call'
+web-console (3.7.0) lib/web_console/middleware.rb:20:in `catch'
+web-console (3.7.0) lib/web_console/middleware.rb:20:in `call'
+actionpack (5.2.6) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (5.2.6) lib/rails/rack/logger.rb:38:in `call_app'
+railties (5.2.6) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (5.2.6) lib/active_support/tagged_logging.rb:71:in `block in tagged'
+activesupport (5.2.6) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (5.2.6) lib/active_support/tagged_logging.rb:71:in `tagged'
+railties (5.2.6) lib/rails/rack/logger.rb:26:in `call'
+sprockets-rails (3.4.0) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (5.2.6) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (5.2.6) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.2.3) lib/rack/method_override.rb:24:in `call'
+rack (2.2.3) lib/rack/runtime.rb:22:in `call'
+activesupport (5.2.6) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (5.2.6) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (5.2.6) lib/action_dispatch/middleware/static.rb:127:in `call'
+rack (2.2.3) lib/rack/sendfile.rb:110:in `call'
+railties (5.2.6) lib/rails/engine.rb:524:in `call'
+puma (3.12.6) lib/puma/configuration.rb:227:in `call'
+puma (3.12.6) lib/puma/server.rb:706:in `handle_request'
+puma (3.12.6) lib/puma/server.rb:476:in `process_client'
+puma (3.12.6) lib/puma/server.rb:334:in `block in run'
+puma (3.12.6) lib/puma/thread_pool.rb:135:in `block in spawn_thread'
+  Rendered users/new.html.erb within layouts/application (1128.3ms)
+Completed 200 OK in 23989ms (Views: 23969.0ms | ActiveRecord: 12.2ms)
+
+
+Completed 200 OK in 6546ms (Views: 6545.3ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users/new" for ::1 at 2021-11-16 17:08:07 -0500
+Processing by UsersController#new as HTML
+  Rendering users/new.html.erb within layouts/application
+  Rendered users/new.html.erb within layouts/application (7714.0ms)
+Started GET "/users/new" for ::1 at 2021-11-16 17:08:15 -0500
+Processing by UsersController#new as HTML
+  Rendering users/new.html.erb within layouts/application
+  Rendered users/new.html.erb within layouts/application (732.4ms)
+Completed 200 OK in 10141ms (Views: 10140.3ms | ActiveRecord: 0.0ms)
+
+
+Completed 200 OK in 4980ms (Views: 4979.4ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users" for ::1 at 2021-11-16 17:08:34 -0500
+Processing by UsersController#create as HTML
+  Parameters: {"user"=>{"email"=>"susan@susan.com", "password"=>"[FILTERED]"}, "signup"=>"Submit"}
+Completed 500 Internal Server Error in 10179ms (ActiveRecord: 0.0ms)
+
+
+
+NameError - uninitialized constant User::BCrypt:
+  app/models/user.rb:46:in `password='
+  app/controllers/users_controller.rb:24:in `create'
+
+Started POST "/__better_errors/a23f36e329ae49c3/variables" for ::1 at 2021-11-16 17:08:45 -0500
+Started POST "/users" for ::1 at 2021-11-16 17:10:57 -0500
+Processing by UsersController#create as HTML
+  Parameters: {"user"=>{"email"=>"susan@susan.com", "password"=>"[FILTERED]"}, "signup"=>"Submit"}
+Completed 500 Internal Server Error in 7630ms (ActiveRecord: 0.0ms)
+
+
+
+NameError - uninitialized constant User::BCrypt:
+  app/models/user.rb:46:in `password='
+  app/controllers/users_controller.rb:24:in `create'
+
+Started POST "/__better_errors/24580070f60a5975/variables" for ::1 at 2021-11-16 17:11:05 -0500
+Started GET "/users/new" for ::1 at 2021-11-16 17:17:58 -0500
+Processing by UsersController#new as HTML
+  Rendering users/new.html.erb within layouts/application
+  Rendered users/new.html.erb within layouts/application (66361.8ms)
+Started GET "/users/new" for ::1 at 2021-11-16 17:19:05 -0500
+Processing by UsersController#new as HTML
+  Rendering users/new.html.erb within layouts/application
+  Rendered users/new.html.erb within layouts/application (833.4ms)
+Completed 200 OK in 69070ms (Views: 69069.1ms | ActiveRecord: 0.0ms)
+
+
+Completed 200 OK in 4704ms (Views: 4703.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users/new" for ::1 at 2021-11-16 17:19:13 -0500
+Processing by UsersController#new as HTML
+  Rendering users/new.html.erb within layouts/application
+  Rendered users/new.html.erb within layouts/application (20751.8ms)
+Started GET "/users/new" for ::1 at 2021-11-16 17:19:35 -0500
+Processing by UsersController#new as HTML
+  Rendering users/new.html.erb within layouts/application
+  Rendered users/new.html.erb within layouts/application (471.8ms)
+Completed 200 OK in 24910ms (Views: 24909.7ms | ActiveRecord: 0.0ms)
+
+
+Completed 200 OK in 153229ms (Views: 153228.5ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users/new" for ::1 at 2021-11-16 17:22:14 -0500
+Processing by UsersController#new as HTML
+  Rendering users/new.html.erb within layouts/application
+  Rendered users/new.html.erb within layouts/application (1.7ms)
+  [1m[36mUser Load (6.9ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:6
+Completed 200 OK in 7225ms (Views: 7190.7ms | ActiveRecord: 28.8ms)
+
+
+Started POST "/users" for ::1 at 2021-11-16 17:22:36 -0500
+Processing by UsersController#create as HTML
+  Parameters: {"user"=>{"email"=>"susan@susan.com", "password"=>"[FILTERED]"}, "signup"=>"Submit"}
+Completed 500 Internal Server Error in 14248ms (ActiveRecord: 0.0ms)
+
+
+
+NameError - uninitialized constant User::BCrypt:
+  app/models/user.rb:46:in `password='
+  app/controllers/users_controller.rb:24:in `create'
+
+Started POST "/__better_errors/125f8f658d477513/variables" for ::1 at 2021-11-16 17:22:50 -0500
+Started POST "/users" for ::1 at 2021-11-16 17:25:58 -0500
+Processing by UsersController#create as HTML
+  Parameters: {"user"=>{"email"=>"susan@susan.com", "password"=>"[FILTERED]"}, "signup"=>"Submit"}
+Completed 500 Internal Server Error in 15765ms (ActiveRecord: 0.0ms)
+
+
+
+NameError - uninitialized constant User::BCrypt:
+  app/models/user.rb:46:in `password='
+  app/controllers/users_controller.rb:24:in `create'
+
+Started POST "/__better_errors/806b93af273f62a1/variables" for ::1 at 2021-11-16 17:26:14 -0500
+Started POST "/__better_errors/806b93af273f62a1/eval" for ::1 at 2021-11-16 17:26:24 -0500
+Started POST "/__better_errors/806b93af273f62a1/eval" for ::1 at 2021-11-16 17:26:29 -0500
+Started POST "/__better_errors/806b93af273f62a1/eval" for ::1 at 2021-11-16 17:26:42 -0500
+Started POST "/users" for ::1 at 2021-11-16 17:28:59 -0500
+Processing by UsersController#create as HTML
+  Parameters: {"user"=>{"email"=>"susan@susan.com", "password"=>"[FILTERED]"}, "signup"=>"Submit"}
+Completed 500 Internal Server Error in 135060ms (ActiveRecord: 0.0ms)
+
+
+
+NameError - uninitialized constant User::BCrypt:
+  app/models/user.rb:46:in `password='
+  app/controllers/users_controller.rb:24:in `create'
+
+Started POST "/__better_errors/869d2a585c203c7c/variables" for ::1 at 2021-11-16 17:31:14 -0500
