@@ -19,6 +19,21 @@ document.addEventListener("DOMContentLoaded", () => {
   // adding SF places as list items
 
   // --- your code here!
+  //GOAL
+  //input a place
+  //click submit button
+  //input box clears
+  //new item added to list
+
+  document.querySelectorAll(".favorite-submit input").forEach((input) => {
+    input.addEventListener("click", SubmitInput);
+  });
+
+  const SubmitInput = (e) => {
+    const submitInput = e.target;
+    
+  };
+
 
 
 
