@@ -146,6 +146,74 @@ var unLikeChirp = exports.unLikeChirp = function unLikeChirp(id) {
 
 /***/ }),
 
+/***/ "./frontend/actions/session_actions.js":
+/*!*********************************************!*\
+  !*** ./frontend/actions/session_actions.js ***!
+  \*********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.logout = exports.login = exports.createNewUser = exports.LOGOUT_CURRENT_USER = exports.RECEIVE_CURRENT_USER = undefined;
+
+var _session = __webpack_require__(/*! ../utils/session */ "./frontend/utils/session.js");
+
+//creating constants that will be messages we send to reducer. we do this to make sure that they're the same no matter where we use them
+//it's important to set const to string bc then you'll get a "hey you spelled something wrong error" instead of a "hey there's no match" error which is much harder to decipher
+var RECEIVE_CURRENT_USER = exports.RECEIVE_CURRENT_USER = 'RECEIVE_CURRENT_USER'; //actions for the calls that we defined in API Util
+
+//import actions we created
+var LOGOUT_CURRENT_USER = exports.LOGOUT_CURRENT_USER = 'LOGOUT_CURRENT_USER';
+
+//ACTION CREATORS (return an action object)
+//the point of an action object is to return a type and payload
+var receiveCurrentUser = function receiveCurrentUser(user) {
+    return {
+        type: RECEIVE_CURRENT_USER,
+        user: user
+    };
+};
+
+var logoutCurrentUser = function logoutCurrentUser() {
+    return {
+        type: LOGOUT_CURRENT_USER
+        //no payload for this one b/c this will just be associated with a "you've been logged out" message
+    };
+};
+
+//THUNK ACTION CREATORS (will be used inside containers)
+//name based on action that it will perform
+var createNewUser = exports.createNewUser = function createNewUser(formUser) {
+    return function (dispatch) {
+        return (0, _session.postUser)(formUser).then(function (user) {
+            return dispatch(receiveCurrentUser(user));
+        });
+    };
+};
+
+var login = exports.login = function login(formUser) {
+    return function (dispatch) {
+        return (0, _session.postSession)(formUser).then(function (user) {
+            return dispatch(receiveCurrentUser(user));
+        }); //question: how did he know that postSession would return a user?
+    };
+};
+
+var logout = exports.logout = function logout() {
+    return function (dispatch) {
+        return (0, _session.deleteSession)().then(function () {
+            return dispatch(logoutCurrentUser());
+        });
+    };
+};
+
+/***/ }),
+
 /***/ "./frontend/bluebird.jsx":
 /*!*******************************!*\
   !*** ./frontend/bluebird.jsx ***!
@@ -222,6 +290,10 @@ var _chirp_index_container = __webpack_require__(/*! ./chirps/chirp_index_contai
 
 var _chirp_index_container2 = _interopRequireDefault(_chirp_index_container);
 
+var _signup_form_container = __webpack_require__(/*! ./session/signup_form_container */ "./frontend/components/session/signup_form_container.jsx");
+
+var _signup_form_container2 = _interopRequireDefault(_signup_form_container);
+
 var _home = __webpack_require__(/*! ./home/home */ "./frontend/components/home/home.jsx");
 
 var _home2 = _interopRequireDefault(_home);
@@ -230,13 +302,15 @@ var _reactRouterDom = __webpack_require__(/*! react-router-dom */ "./node_module
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+//make sure to import the container or it won't have the props!!!!
 exports.default = function () {
   return _react2.default.createElement(
     'div',
     null,
     _react2.default.createElement(_reactRouterDom.Route, { path: '/', component: _nav_bar_container2.default }),
     _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/', component: _home2.default }),
-    _react2.default.createElement(_reactRouterDom.Route, { path: '/chirps', component: _chirp_index_container2.default })
+    _react2.default.createElement(_reactRouterDom.Route, { path: '/chirps', component: _chirp_index_container2.default }),
+    _react2.default.createElement(_reactRouterDom.Route, { path: '/signup', component: _signup_form_container2.default })
   );
 };
 
@@ -498,11 +572,30 @@ var _reactRouterDom = __webpack_require__(/*! react-router-dom */ "./node_module
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+//argument being passed in below are from the nav bar container, we're using destructuring
 exports.default = function (_ref) {
   var currentUser = _ref.currentUser,
       logout = _ref.logout;
 
-  var display = _react2.default.createElement(
+
+  //below we're implementing ternery logic to decide which buttons to display in the nav bar
+  var display = currentUser ? _react2.default.createElement(
+    'div',
+    null,
+    _react2.default.createElement(
+      'p',
+      null,
+      'Hello, ',
+      currentUser.username
+    ),
+    _react2.default.createElement(
+      'button',
+      { onClick: logout },
+      'Logout'
+    )
+  ) :
+  // the two links below are the two buttons in our nav bar but we only want to show them if someone's logged out
+  _react2.default.createElement(
     'div',
     null,
     _react2.default.createElement(
@@ -559,24 +652,33 @@ var _nav_bar = __webpack_require__(/*! ./nav_bar */ "./frontend/components/nav_b
 
 var _nav_bar2 = _interopRequireDefault(_nav_bar);
 
+var _session_actions = __webpack_require__(/*! ../../actions/session_actions */ "./frontend/actions/session_actions.js");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+//in mSTP we are passing current user from state to the nav bar component
+var mapStateToProps = function mapStateToProps(state) {
+  return {
+    currentUser: state.session.currentUser
+  };
+};
+
+//in MDTP we are passing down the logout functionality to our nav bar
+
 
 // Comment this back in after you have built the login functionality
 
-// import { logout } from '../../actions/session';
-
-// const mapStateToProps = state => ({
-//   currentUser: state.session.currentUser,
-// });
-
-// const mapDispatchToProps = dispatch => ({
-//   logout: () => dispatch(logout()),
-// });
-
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+  return {
+    logout: function logout() {
+      return dispatch((0, _session_actions.logout)());
+    }
+  };
+};
 
 // Comment this out when you have built the login functionality
-var mapStateToProps = null;
-var mapDispatchToProps = null;
+// const mapStateToProps = null;
+// const mapDispatchToProps = null;
 
 exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_nav_bar2.default);
 
@@ -703,6 +805,168 @@ exports.default = function (_ref) {
 
 /***/ }),
 
+/***/ "./frontend/components/session/signup_form.jsx":
+/*!*****************************************************!*\
+  !*** ./frontend/components/session/signup_form.jsx ***!
+  \*****************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(/*! react */ "./node_modules/react/react.js");
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var SignupForm = function (_React$Component) {
+    _inherits(SignupForm, _React$Component);
+
+    function SignupForm(props) {
+        _classCallCheck(this, SignupForm);
+
+        var _this = _possibleConstructorReturn(this, (SignupForm.__proto__ || Object.getPrototypeOf(SignupForm)).call(this, props));
+
+        debugger;
+        _this.state = {
+            username: '',
+            email: '',
+            password: ''
+        };
+
+        _this.handleInput = _this.handleInput.bind(_this); //why does handleInput not need to be bound?
+        _this.handleSubmit = _this.handleSubmit.bind(_this);
+        return _this;
+    }
+
+    //build the actions that the form will use
+
+
+    _createClass(SignupForm, [{
+        key: 'handleInput',
+        value: function handleInput(field) {
+            var _this2 = this;
+
+            return function (e) {
+                _this2.setState(_defineProperty({}, field, e.target.value));
+            };
+        }
+    }, {
+        key: 'handleSubmit',
+        value: function handleSubmit(e) {
+            var _this3 = this;
+
+            e.preventDefault(); //prevents page from automatically sending post request and rerending the page which would result in us losing the user signing up's info in our state
+            this.props.createNewUser(this.state).then(function () {
+                return _this3.props.history.push('/chirps');
+            }); //if we successfully create a new user, force redirect to index page. we will have access to history b/c SignUpForm will be wrapped in a Route component
+        }
+    }, {
+        key: 'render',
+        value: function render() {
+            return _react2.default.createElement(
+                'div',
+                { className: 'session-form' },
+                _react2.default.createElement(
+                    'h2',
+                    null,
+                    'Sign Up!'
+                ),
+                _react2.default.createElement(
+                    'form',
+                    null,
+                    _react2.default.createElement(
+                        'label',
+                        null,
+                        'Username',
+                        _react2.default.createElement('input', { type: 'text', value: this.state.username, onChange: this.handleInput('username') })
+                    ),
+                    _react2.default.createElement(
+                        'label',
+                        null,
+                        'Email',
+                        _react2.default.createElement('input', { type: 'text', value: this.state.email, onChange: this.handleInput('email') })
+                    ),
+                    _react2.default.createElement(
+                        'label',
+                        null,
+                        'Password',
+                        _react2.default.createElement('input', { type: 'password', value: this.state.password, onChange: this.handleInput('password') })
+                    ),
+                    _react2.default.createElement(
+                        'button',
+                        { onClick: this.handleSubmit },
+                        'Sign Up'
+                    )
+                )
+            );
+        }
+    }]);
+
+    return SignupForm;
+}(_react2.default.Component);
+
+exports.default = SignupForm;
+
+/***/ }),
+
+/***/ "./frontend/components/session/signup_form_container.jsx":
+/*!***************************************************************!*\
+  !*** ./frontend/components/session/signup_form_container.jsx ***!
+  \***************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+        value: true
+});
+
+var _reactRedux = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+
+var _session_actions = __webpack_require__(/*! ../../actions/session_actions */ "./frontend/actions/session_actions.js");
+
+var _signup_form = __webpack_require__(/*! ./signup_form */ "./frontend/components/session/signup_form.jsx");
+
+var _signup_form2 = _interopRequireDefault(_signup_form);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+//we don't need a mSTP because signing up a user does not depend on state
+
+//since this is the sigup form we need an action that allows us to create a new user
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+        debugger;
+        return {
+                createNewUser: function createNewUser(formUser) {
+                        return dispatch((0, _session_actions.createNewUser)(formUser));
+                }
+        };
+};
+
+//pass in null for first parameter bc we don't have a mSTP
+exports.default = (0, _reactRedux.connect)(null, mapDispatchToProps)(_signup_form2.default);
+
+/***/ }),
+
 /***/ "./frontend/reducers/chirps.js":
 /*!*************************************!*\
   !*** ./frontend/reducers/chirps.js ***!
@@ -819,7 +1083,7 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-var _session_actions = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module '../action/session_actions'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+var _session_actions = __webpack_require__(/*! ../actions/session_actions */ "./frontend/actions/session_actions.js");
 
 //api util requests were executed by the thunk creators which then took the promise returned by the request and made it the payload value of an action object which also has a type
 //the thunk action creator then sends it to the reducer (aka here!) which evaluate the type k-v pair in the action object and determines how to update the state accordingly. we don't actually modify the state though, we just copy it and then alter that and return it (usually)
@@ -953,6 +1217,58 @@ var deleteLikeFromChirp = exports.deleteLikeFromChirp = function deleteLikeFromC
     method: 'DELETE',
     data: { id: id }
   });
+};
+
+/***/ }),
+
+/***/ "./frontend/utils/session.js":
+/*!***********************************!*\
+  !*** ./frontend/utils/session.js ***!
+  \***********************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+//this is all happening in the backend 
+/* 
+we want 3 methods:
+    create a user
+    login a user
+    sign a user out
+
+
+name each method according to the HTTP method that it will be using
+*/
+
+//CREATE USER
+var postUser = exports.postUser = function postUser(user) {
+    return $.ajax({
+        method: 'POST',
+        url: '/api/users',
+        data: { user: user }
+    });
+};
+
+//LOGIN USER
+var postSession = exports.postSession = function postSession(user) {
+    return $.ajax({
+        method: 'POST',
+        url: '/api/session',
+        data: { user: user }
+    });
+};
+
+//SIGN OUT USER (deletes session & logs out user)
+var deleteSession = exports.deleteSession = function deleteSession() {
+    return $.ajax({
+        method: 'DELETE',
+        url: '/api/session'
+    });
 };
 
 /***/ }),

@@ -6,9 +6,12 @@ import SignupForm from './signup_form'
 
 //we don't need a mSTP because signing up a user does not depend on state
 
-const mapDispatchToProps = dispatch => ({
-        createNewUser: formUser => dispatch(createNewUser(formUser))
-})
+const mapDispatchToProps = dispatch => {
+        debugger
+        return{
+                createNewUser: formUser => dispatch(createNewUser(formUser))
+        }
+}
 
 //pass in null for first parameter bc we don't have a mSTP
 export default connect(null, mapDispatchToProps)(SignupForm);

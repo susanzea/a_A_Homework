@@ -1,7 +1,7 @@
 import {
     RECEIVE_CURRENT_USER,
     LOGOUT_CURRENT_USER
-} from '../action/session_actions';
+} from '../actions/session_actions';
 
 //api util requests were executed by the thunk creators which then took the promise returned by the request and made it the payload value of an action object which also has a type
 //the thunk action creator then sends it to the reducer (aka here!) which evaluate the type k-v pair in the action object and determines how to update the state accordingly. we don't actually modify the state though, we just copy it and then alter that and return it (usually)
