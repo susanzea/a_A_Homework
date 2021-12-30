@@ -244,8 +244,11 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 document.addEventListener('DOMContentLoaded', function () {
   var root = document.getElementById('root');
+
+  //below, if no user then preloadedState is empty, if there is a user, it will be that user obj under key of currentUser
   var preloadedState = undefined;
   if (window.currentUser) {
+    debugger;
     preloadedState = {
       session: {
         currentUser: window.currentUser
@@ -843,14 +846,12 @@ var SignupForm = function (_React$Component) {
 
         var _this = _possibleConstructorReturn(this, (SignupForm.__proto__ || Object.getPrototypeOf(SignupForm)).call(this, props));
 
-        debugger;
         _this.state = {
             username: '',
             email: '',
             password: ''
         };
 
-        _this.handleInput = _this.handleInput.bind(_this); //why does handleInput not need to be bound?
         _this.handleSubmit = _this.handleSubmit.bind(_this);
         return _this;
     }
@@ -954,7 +955,6 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 //since this is the sigup form we need an action that allows us to create a new user
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
-        debugger;
         return {
                 createNewUser: function createNewUser(formUser) {
                         return dispatch((0, _session_actions.createNewUser)(formUser));

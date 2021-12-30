@@ -3,14 +3,12 @@ import React from "react";
 class SignupForm extends React.Component {
     constructor(props) {
         super(props);
-        debugger
         this.state = {
             username: '',
             email: '',
             password: ''
         };
 
-        this.handleInput = this.handleInput.bind(this); //why does handleInput not need to be bound?
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
@@ -24,7 +22,7 @@ class SignupForm extends React.Component {
     handleSubmit(e) {
         e.preventDefault(); //prevents page from automatically sending post request and rerending the page which would result in us losing the user signing up's info in our state
         this.props.createNewUser(this.state)
-        .then(() => this.props.history.push('/chirps')) //if we successfully create a new user, force redirect to index page. we will have access to history b/c SignUpForm will be wrapped in a Route component
+        .then(() => this.props.history.push('/chirps')); //if we successfully create a new user, force redirect to index page. we will have access to history b/c SignUpForm will be wrapped in a Route component
     }
 
     render() {

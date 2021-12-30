@@ -7,7 +7,6 @@ import SignupForm from './signup_form'
 //we don't need a mSTP because signing up a user does not depend on state
 
 const mapDispatchToProps = dispatch => {
-        debugger
         return{
                 createNewUser: formUser => dispatch(createNewUser(formUser))
         }
